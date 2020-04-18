@@ -28,8 +28,8 @@ public class ExercicioController {
 	}
 	
 	@RequestMapping("{id}")
-	public Optional<Exercicio> obterPorId(@PathVariable Integer id) {
-		return service.obterPorId(id);
+	public Exercicio obterPorId(@PathVariable Integer id) {
+		return service.obterExercicio(id);
 	}
 	
 	@PostMapping

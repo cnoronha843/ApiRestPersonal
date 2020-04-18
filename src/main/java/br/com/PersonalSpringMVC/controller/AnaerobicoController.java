@@ -27,7 +27,7 @@ public class AnaerobicoController {
 	}
 	
 	@RequestMapping("{id}")
-	public Optional<Anaerobico> obterPorId(@PathVariable Integer id) {
+	public Anaerobico obterPorId(@PathVariable Integer id) {
 		return service.obterPorId(id);
 	}
 	

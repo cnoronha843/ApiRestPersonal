@@ -28,8 +28,8 @@ public class ProfessorController {
 	}
 	
 	@RequestMapping("{id}")
-	public Optional<Professor> obterPorId(@PathVariable Integer id) {
-		return service.obterPorId(id);
+	public Professor obterPorId(@PathVariable Integer id) {
+		return service.obterProfessor(id);
 	}
 	
 	@PostMapping

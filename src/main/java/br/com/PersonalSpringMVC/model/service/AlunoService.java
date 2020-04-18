@@ -11,22 +11,21 @@ import br.com.PersonalSpringMVC.negocio.Aluno;
 
 @Service
 public class AlunoService {
-
+	
 	@Autowired
 	private IAlunoRepository repository;
-
+	
 	public List<Aluno> obterLista(){
 		return (List<Aluno>)repository.findAll();
 	}
-	
-	public Optional<Aluno> obterPorId(Integer id) {
-		return repository.findById(id);
+	public Aluno obterPorId(Integer id) {		
+		return repository.findById(id).get();
 	}
-	
+
 	public void incluir(Aluno aluno) {
 		repository.save(aluno);
 	}
-	
+
 	public void excluir(Integer id) {
 		repository.deleteById(id);
 	}

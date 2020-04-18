@@ -1,30 +1,32 @@
 package br.com.PersonalSpringMVC.model.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.PersonalSpringMVC.model.repository.IAnaerobicoRepository;
+import br.com.PersonalSpringMVC.negocio.Aluno;
 import br.com.PersonalSpringMVC.negocio.Anaerobico;
+import br.com.PersonalSpringMVC.negocio.Professor;
+
 @Service
 public class AnaerobicoService {
-@Autowired
+	
+	@Autowired
 	private IAnaerobicoRepository repository;
-
+	
 	public List<Anaerobico> obterLista(){
 		return (List<Anaerobico>)repository.findAll();
 	}
-	
-	public Optional<Anaerobico> obterPorId(Integer id) {
-		return repository.findById(id);
+	public Anaerobico obterPorId(Integer id) {		
+		return repository.findById(id).get();
 	}
-	
+
 	public void incluir(Anaerobico anaerobico) {
 		repository.save(anaerobico);
 	}
-	
+
 	public void excluir(Integer id) {
 		repository.deleteById(id);
 	}

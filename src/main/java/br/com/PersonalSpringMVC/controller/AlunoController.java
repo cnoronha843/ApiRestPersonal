@@ -29,7 +29,7 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("{id}")
-	public Optional<Aluno> obterPorId(@PathVariable Integer id) {
+	public Aluno obterPorId(@PathVariable Integer id) {
 		return service.obterPorId(id);
 	}
 	

@@ -2,6 +2,7 @@ package br.com.PersonalSpringMVC.negocio;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
@@ -22,32 +24,25 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipoExercicio")
 @JsonSubTypes({
-    @JsonSubTypes.Type(value=Aerobico.class, name = "Aerobico"),
-    @JsonSubTypes.Type(value=Anaerobico.class, name = "Anaerobico")
+    @Type(value=Aerobico.class, name = "Aerobico"),
+    @Type(value=Anaerobico.class, name = "Anaerobico")
     
 })
 public abstract class Exercicio {
-	
 	@Id
-	@GeneratedValue	 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nomeDoExercicio;
 	private int tempoRecuperacao;
 	private int quantidadeBlocos;
-	@ManyToOne
-	@JoinColumn(name = "idAluno")
-	@JsonBackReference
-	private Aluno aluno;
-	
+	private String tipoExercicio;
+
 	
 
-	public Aluno getAluno() {
-		return aluno;
+	public Exercicio() {
+	
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
 
 	public Exercicio(String nomeDoExercicio, int tempoRecuperacao, int quantidadeBlocos) {
 		super();
@@ -56,6 +51,17 @@ public abstract class Exercicio {
 		this.quantidadeBlocos = quantidadeBlocos;
 	}
 	
+	
+	public String getTipoExercicio() {
+		return tipoExercicio;
+	}
+
+
+	public void setTipoExercicio(String tipoExercicio) {
+		this.tipoExercicio = tipoExercicio;
+	}
+
+
 	public String getNomeDoExercicio() {
 		return nomeDoExercicio;
 	}

@@ -27,10 +27,6 @@ public class AerobicoController {
 		return service.obterLista();
 	}
 	
-	@RequestMapping("{id}")
-	public Optional<Aerobico> obterPorId(@PathVariable Integer id) {
-		return service.obterPorId(id);
-	}
 	
 	@PostMapping
 	public void incluir(@RequestBody Aerobico aerobico) {

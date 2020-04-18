@@ -1,9 +1,8 @@
-package br.com.PersonalSpringMVC.negocio;
+	package br.com.PersonalSpringMVC.negocio;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,39 +19,65 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name= "TAluno")
-public class Aluno{
-	
-	@Id	 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	 
+public class Aluno extends Usuario{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name = "descricao")
 	private int idade;
 	private float peso;
-	private String nome;
-	private String telefone;
-	@OneToOne( fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval= true )	  
-	@JoinColumn(name = "idProfessor")	 
-	private  Professor professor;	
-	  @OneToMany( mappedBy = "aluno", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true )	  	  
-	  @JsonManagedReference	 
-	private List <Exercicio> exercicios;
-
-		
+	@OneToOne(
+			fetch = FetchType.EAGER,
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+			)
+	@JoinColumn(name = "idProfessor")
+	private  Professor professor;
 	
-	public String getNome() {
-		return nome;
+	@OneToMany(
+			fetch = FetchType.EAGER,
+			cascade = CascadeType.DETACH,
+			orphanRemoval = true
+			)
+	@JoinColumn(name = "idExercicio", referencedColumnName="id")
+	@JsonManagedReference
+	private List <Exercicio> exercicios;
+	
+
+	public Aluno() {
+		super();
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public Aluno(Integer id, int idade, float peso, Professor professor, List<Exercicio> exercicios) {
+		super();
+		this.id = id;
+		this.idade = idade;
+		this.peso = peso;
+		this.professor = professor;
+		this.exercicios = exercicios;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
 	}
 
 	public Professor getProfessor() {
@@ -71,29 +96,9 @@ public class Aluno{
 		this.exercicios = exercicios;
 	}
 
-	public Aluno() {
 		
-	}
 	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	
-	public int getIdade() {
-		return idade;
-	}
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-	public float getPeso() {
-		return peso;
-	}
-	public void setPeso(float peso) {
-		this.peso = peso;
-	}
 	
 	
 
